@@ -1,27 +1,14 @@
 version: '3'
 services:
-  mysqldb:
-    image: mysql:5.7
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=certificates
-    ports:
-    - 3306:3306
-    volumes:
-    - /var/local/nodejs/mysql-docker/db-config:/ets/mysql
-    - /var/local/nodejs/mysql-docker/db-data:/var/lib/mysql
-    - /var/local/nodejs/mysql-docker/backup/files/:/data_backup/data
-    - /var/local/nodejs/mysql-docker/certificates.sql:/docker-entrypoint-initdb.d/setup.sql
   api:
     image: vstu_eds_back:latest
     container_name: vstu_eds_back
-    depends_on:
-      - mysqldb
     environment:
       DB_HOST: mysqldb
     restart: always
-    links:
-      - mysqldb
     ports:
       - 3000:3000
+
+networks:
+  default:
+    name: bridge
