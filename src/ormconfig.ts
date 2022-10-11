@@ -3,7 +3,7 @@ import { ConnectionOptions } from 'typeorm';
 
 const config: ConnectionOptions = {
     type: 'mysql',
-    host: 'host.docker.internal',
+    host: String(process.env.DB_HOST),
     port: 3306,
     username: 'root',
     password: 'password',
