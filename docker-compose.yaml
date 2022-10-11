@@ -4,3 +4,8 @@ services:
         image: vstu_eds_back:latest
         ports:
             - 3000:3000
+        networks: 
+          - internal
+
+networks:
+  internal:
