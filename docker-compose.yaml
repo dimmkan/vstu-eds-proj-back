@@ -1,0 +1,6 @@
+version: "3.5"
+services:
+    api:
+        image: vstu_eds_back:latest
+        ports:
+            - 3000:3000
