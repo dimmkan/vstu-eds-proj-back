@@ -5,7 +5,7 @@ import {CreateKktDto} from "./dto/createKkt.dto";
 import {UpdateKktDto} from "./dto/updateKkt.dto";
 import {DeleteResult} from "typeorm";
 
-@Controller('kkt')
+@Controller('api/kkt')
 export class KktController {
     constructor(private readonly kktService: KktService) {
     }

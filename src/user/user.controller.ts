@@ -5,7 +5,7 @@ import {DeleteResult, UpdateResult} from "typeorm";
 import {UpdateUserDto} from "./dto/updateUser.dto";
 import {LoginUserDto} from "./dto/loginUser.dto";
 
-@Controller('users')
+@Controller('api/users')
 export class UserController {
     constructor(private readonly userService: UserService) {
     }

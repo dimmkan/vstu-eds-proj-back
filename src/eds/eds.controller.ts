@@ -18,7 +18,7 @@ import {CreateEdsDto} from "./dto/creadteEds.dto";
 import {UpdateEdsDto} from "./dto/updateEds.dto";
 import {DeleteResult} from "typeorm";
 
-@Controller('eds')
+@Controller('api/eds')
 export class EdsController {
     constructor(private readonly edsService: EdsService) {
     }
