@@ -5,26 +5,27 @@ import { UserModule } from './user/user.module';
 import { EdsModule } from './eds/eds.module';
 import { KktModule } from './kkt/kkt.module';
 import { TelegramModule } from './telegram/telegram.module';
-import {ScheduleModule} from "@nestjs/schedule";
-import {MailerModule} from "@nestjs-modules/mailer";
-import {TypeOrmModule} from "@nestjs/typeorm";
-import ormconfig from "./ormconfig";
+import { ScheduleModule } from '@nestjs/schedule';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import ormconfig from './ormconfig';
 
 @Module({
-  imports: [UserModule,
+  imports: [
+    UserModule,
     EdsModule,
     KktModule,
     TelegramModule,
     ScheduleModule.forRoot(),
     MailerModule.forRoot({
       transport: {
-        host:'exch01.test.local',
-        port:'587',
+        host: 'exch01.test.local',
+        port: '587',
         secure: false,
         requireTLS: true,
         auth: {
-          user:'user',
-          pass:'password'
+          user: 'user',
+          pass: 'password',
         },
         tls: {
           rejectUnauthorized: false,
@@ -34,7 +35,7 @@ import ormconfig from "./ormconfig";
         from: 'Управление сертификатами <send@test.ru>',
       },
     }),
-    TypeOrmModule.forRoot(ormconfig)
+    TypeOrmModule.forRoot(ormconfig),
   ],
   controllers: [AppController],
   providers: [AppService],

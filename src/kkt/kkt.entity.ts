@@ -1,37 +1,37 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({name: 'kkt_certificate'})
+@Entity({ name: 'kkt_certificate' })
 export class KktEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    organization: string;
+  @Column()
+  organization: string;
 
-    @Column()
-    regNumber: string;
+  @Column()
+  regNumber: string;
 
-    @Column()
-    zavNumber: string;
+  @Column()
+  zavNumber: string;
 
-    @Column()
-    kktModel: string;
+  @Column()
+  kktModel: string;
 
-    @Column({ type: 'date' })
-    regDate: string;
+  @Column({ type: 'date' })
+  regDate: string;
 
-    @Column({ type: 'date' })
-    toDate: string;
+  @Column({ type: 'date' })
+  toDate: string;
 
-    @Column()
-    ofd: string;
+  @Column()
+  ofd: string;
 
-    @Column()
-    fnModel: string;
+  @Column()
+  fnModel: string;
 
-    @Column()
-    zavNumberFN: string;
+  @Column()
+  zavNumberFN: string;
 
-    @Column()
-    comPortNumber: string;
+  @Column()
+  comPortNumber: string;
 }
