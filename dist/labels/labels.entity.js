@@ -9,28 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersLabels = void 0;
+exports.UsersLabelsEntity = void 0;
 const typeorm_1 = require("typeorm");
-let UsersLabels = class UsersLabels {
+let UsersLabelsEntity = class UsersLabelsEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], UsersLabels.prototype, "id", void 0);
+], UsersLabelsEntity.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UsersLabels.prototype, "user_name", void 0);
+], UsersLabelsEntity.prototype, "user_name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UsersLabels.prototype, "comp_name", void 0);
+], UsersLabelsEntity.prototype, "comp_name", void 0);
 __decorate([
     (0, typeorm_1.Column)('simple-json'),
     __metadata("design:type", Array)
-], UsersLabels.prototype, "ids_array", void 0);
-UsersLabels = __decorate([
+], UsersLabelsEntity.prototype, "ids_array", void 0);
+UsersLabelsEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'users_labels' })
-], UsersLabels);
-exports.UsersLabels = UsersLabels;
+], UsersLabelsEntity);
+exports.UsersLabelsEntity = UsersLabelsEntity;
 //# sourceMappingURL=labels.entity.js.map

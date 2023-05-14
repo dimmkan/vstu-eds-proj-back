@@ -10,10 +10,13 @@ exports.LabelsModule = void 0;
 const common_1 = require("@nestjs/common");
 const labels_controller_1 = require("./labels.controller");
 const labels_service_1 = require("./labels.service");
+const typeorm_1 = require("@nestjs/typeorm");
+const labels_entity_1 = require("./labels.entity");
 let LabelsModule = class LabelsModule {
 };
 LabelsModule = __decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([labels_entity_1.UsersLabelsEntity])],
         controllers: [labels_controller_1.LabelsController],
         providers: [labels_service_1.LabelsService],
     })

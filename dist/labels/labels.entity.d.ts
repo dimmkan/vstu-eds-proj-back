@@ -1,4 +1,4 @@
-export declare class UsersLabels {
+export declare class UsersLabelsEntity {
     id: number;
     user_name: string;
     comp_name: string;

@@ -59,7 +59,7 @@ AppModule = __decorate([
                     password: 'password',
                     database: 'certificates',
                     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-                    synchronize: true,
+                    synchronize: false,
                 }),
             }),
             labels_module_1.LabelsModule,
