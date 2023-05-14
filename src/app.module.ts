@@ -1,3 +1,4 @@
+import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,34 +9,49 @@ import { TelegramModule } from './telegram/telegram.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import ormconfig from './ormconfig';
+import { LabelsModule } from './labels/labels.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     UserModule,
     EdsModule,
     KktModule,
     TelegramModule,
     ScheduleModule.forRoot(),
-    MailerModule.forRoot({
-      transport: {
-        host: 'exch01.test.local',
-        port: '587',
-        secure: false,
-        requireTLS: true,
-        auth: {
-          user: 'user',
-          pass: 'password',
+    MailerModule.forRootAsync({
+      useFactory: () => ({
+        transport: {
+          host: 'exch01.test.local',
+          port: '587',
+          secure: false,
+          requireTLS: true,
+          auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASSWORD,
+          },
+          tls: {
+            rejectUnauthorized: false,
+          },
         },
-        tls: {
-          rejectUnauthorized: false,
+        defaults: {
+          from: 'Управление сертификатами <send@test.ru>',
         },
-      },
-      defaults: {
-        from: 'Управление сертификатами <send@test.ru>',
-      },
+      }),
     }),
-    TypeOrmModule.forRoot(ormconfig),
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        type: 'mysql',
+        host: process.env.DB_HOST,
+        port: 3306,
+        username: 'root',
+        password: 'password',
+        database: 'certificates',
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        synchronize: false,
+      }),
+    }),
+    LabelsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

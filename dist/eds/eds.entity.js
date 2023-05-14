@@ -74,6 +74,22 @@ __decorate([
     __metadata("design:type", Number)
 ], EdsEntity.prototype, "fileSize", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true, select: false }),
+    __metadata("design:type", String)
+], EdsEntity.prototype, "openPartFileData", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], EdsEntity.prototype, "openPartFileName", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, select: false }),
+    __metadata("design:type", String)
+], EdsEntity.prototype, "openPartFileType", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, select: false }),
+    __metadata("design:type", Number)
+], EdsEntity.prototype, "openPartFileSize", void 0);
+__decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
 ], EdsEntity.prototype, "accountId", void 0);

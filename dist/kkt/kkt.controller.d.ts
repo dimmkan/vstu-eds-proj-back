@@ -1,8 +1,8 @@
-import { KktService } from "./kkt.service";
-import { KktEntity } from "./kkt.entity";
-import { CreateKktDto } from "./dto/createKkt.dto";
-import { UpdateKktDto } from "./dto/updateKkt.dto";
-import { DeleteResult } from "typeorm";
+import { KktService } from './kkt.service';
+import { KktEntity } from './kkt.entity';
+import { CreateKktDto } from './dto/createKkt.dto';
+import { UpdateKktDto } from './dto/updateKkt.dto';
+import { DeleteResult } from 'typeorm';
 export declare class KktController {
     private readonly kktService;
     constructor(kktService: KktService);

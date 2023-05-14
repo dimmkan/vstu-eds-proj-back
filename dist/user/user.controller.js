@@ -32,7 +32,7 @@ let UserController = class UserController {
     }
     async authUser(loginUserDto) {
         const result = await this.userService.authUser(loginUserDto);
-        return { 'isAuth': result };
+        return { isAuth: result };
     }
 };
 __decorate([

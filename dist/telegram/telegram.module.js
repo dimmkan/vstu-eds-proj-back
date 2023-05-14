@@ -14,7 +14,7 @@ let TelegramModule = class TelegramModule {
 TelegramModule = __decorate([
     (0, common_1.Module)({
         providers: [telegram_service_1.TelegramService],
-        exports: [telegram_service_1.TelegramService]
+        exports: [telegram_service_1.TelegramService],
     })
 ], TelegramModule);
 exports.TelegramModule = TelegramModule;

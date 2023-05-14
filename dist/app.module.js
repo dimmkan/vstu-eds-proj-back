@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const config_1 = require("@nestjs/config");
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
@@ -17,35 +18,51 @@ const telegram_module_1 = require("./telegram/telegram.module");
 const schedule_1 = require("@nestjs/schedule");
 const mailer_1 = require("@nestjs-modules/mailer");
 const typeorm_1 = require("@nestjs/typeorm");
-const ormconfig_1 = require("./ormconfig");
+const labels_module_1 = require("./labels/labels.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule,
+        imports: [
+            config_1.ConfigModule.forRoot(),
+            user_module_1.UserModule,
             eds_module_1.EdsModule,
             kkt_module_1.KktModule,
             telegram_module_1.TelegramModule,
             schedule_1.ScheduleModule.forRoot(),
-            mailer_1.MailerModule.forRoot({
-                transport: {
-                    host: 'exch01.vybor.local',
-                    port: '587',
-                    secure: false,
-                    requireTLS: true,
-                    auth: {
-                        user: 'vybor\\send',
-                        pass: 'arf7KOoGkj'
+            mailer_1.MailerModule.forRootAsync({
+                useFactory: () => ({
+                    transport: {
+                        host: 'exch01.test.local',
+                        port: '587',
+                        secure: false,
+                        requireTLS: true,
+                        auth: {
+                            user: process.env.MAIL_USER,
+                            pass: process.env.MAIL_PASSWORD,
+                        },
+                        tls: {
+                            rejectUnauthorized: false,
+                        },
                     },
-                    tls: {
-                        rejectUnauthorized: false,
+                    defaults: {
+                        from: 'Управление сертификатами <send@test.ru>',
                     },
-                },
-                defaults: {
-                    from: 'Управление сертификатами <send@vyborstroi.ru>',
-                },
+                }),
             }),
-            typeorm_1.TypeOrmModule.forRoot(ormconfig_1.default)
+            typeorm_1.TypeOrmModule.forRootAsync({
+                useFactory: () => ({
+                    type: 'mysql',
+                    host: process.env.DB_HOST,
+                    port: 3306,
+                    username: 'root',
+                    password: 'password',
+                    database: 'certificates',
+                    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+                    synchronize: true,
+                }),
+            }),
+            labels_module_1.LabelsModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

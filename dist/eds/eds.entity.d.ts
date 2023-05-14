@@ -14,5 +14,9 @@ export declare class EdsEntity {
     fileName: string;
     fileType: string;
     fileSize: number;
+    openPartFileData: string;
+    openPartFileName: string;
+    openPartFileType: string;
+    openPartFileSize: number;
     accountId: number;
 }

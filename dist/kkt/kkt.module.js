@@ -19,7 +19,7 @@ KktModule = __decorate([
     (0, common_1.Module)({
         imports: [telegram_module_1.TelegramModule, typeorm_1.TypeOrmModule.forFeature([kkt_entity_1.KktEntity])],
         controllers: [kkt_controller_1.KktController],
-        providers: [kkt_service_1.KktService]
+        providers: [kkt_service_1.KktService],
     })
 ], KktModule);
 exports.KktModule = KktModule;

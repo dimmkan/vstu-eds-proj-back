@@ -1,5 +1,4 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Type } from 'class-transformer';
 
 @Entity({ name: 'eds_certificate' })
 export class EdsEntity {

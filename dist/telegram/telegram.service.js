@@ -19,7 +19,9 @@ let TelegramService = class TelegramService {
         this.bot = new telegraf_1.Telegraf(this.options.token);
     }
     async sendMessage(message, chatId = this.options.chatId) {
-        await this.bot.telegram.sendMessage(chatId, message, { parse_mode: 'HTML' });
+        await this.bot.telegram.sendMessage(chatId, message, {
+            parse_mode: 'HTML',
+        });
     }
 };
 TelegramService = __decorate([

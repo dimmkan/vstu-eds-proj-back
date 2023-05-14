@@ -46,7 +46,7 @@ let EdsService = class EdsService {
         return await this.edsRepository.findOne({ id }, { select: ['fileData', 'fileName', 'fileType', 'fileSize'] });
     }
     async addFile(file, id) {
-        let eds = await this.edsRepository.findOne(id);
+        const eds = await this.edsRepository.findOne(id);
         eds.fileData = file.buffer.toString('base64');
         eds.fileName = file.originalname;
         eds.fileType = file.mimetype;
@@ -54,7 +54,7 @@ let EdsService = class EdsService {
         await this.edsRepository.save(eds);
     }
     async deleteFile(id) {
-        let eds = await this.edsRepository.findOne(id);
+        const eds = await this.edsRepository.findOne(id);
         eds.fileData = null;
         eds.fileName = null;
         eds.fileType = null;
@@ -80,7 +80,10 @@ let EdsService = class EdsService {
             const org = element['organization'];
             const cert = element['certificateSerial'];
             emailRows += `<tr><td>${org}</td><td>${cert}</td><td>${formatTime}</td><td>${interval} дней</td></tr>`;
-            const tgMessage = '<b>' + `Заканчивается сертификат эцп! (осталось ${interval} дней)` + '</b>' + `\n Организация: ${org} \n Сер. номер: ${cert} \n Дата окончания: ${formatTime}`;
+            const tgMessage = '<b>' +
+                `Заканчивается сертификат эцп! (осталось ${interval} дней)` +
+                '</b>' +
+                `\n Организация: ${org} \n Сер. номер: ${cert} \n Дата окончания: ${formatTime}`;
             await this.telegramService.sendMessage(tgMessage);
         }
         if (emailRows !== '') {
@@ -97,10 +100,8 @@ let EdsService = class EdsService {
             this.mailerService.sendMail({
                 to: 'd.kanaev@vyborstroi.ru, m.grachev@vyborstroi.ru',
                 subject: 'Заканчивается срок действия ЭЦП (менее 30 дней)',
-                html: message
-            })
-                .then(() => { })
-                .catch(() => { });
+                html: message,
+            });
         }
     }
     async cronEds14() {
@@ -122,7 +123,10 @@ let EdsService = class EdsService {
             const org = element['organization'];
             const cert = element['certificateSerial'];
             emailRows += `<tr><td>${org}</td><td>${cert}</td><td>${formatTime}</td><td>${interval} дней</td></tr>`;
-            const tgMessage = '<b>' + `Заканчивается сертификат эцп! (осталось ${interval} дней)` + '</b>' + `\n Организация: ${org} \n Сер. номер: ${cert} \n Дата окончания: ${formatTime}`;
+            const tgMessage = '<b>' +
+                `Заканчивается сертификат эцп! (осталось ${interval} дней)` +
+                '</b>' +
+                `\n Организация: ${org} \n Сер. номер: ${cert} \n Дата окончания: ${formatTime}`;
             await this.telegramService.sendMessage(tgMessage);
         }
         if (emailRows !== '') {
@@ -139,11 +143,35 @@ let EdsService = class EdsService {
             this.mailerService.sendMail({
                 to: 'd.kanaev@vyborstroi.ru, m.grachev@vyborstroi.ru',
                 subject: 'Заканчивается срок действия ЭЦП (менее 14 дней)',
-                html: message
-            })
-                .then(() => { })
-                .catch(() => { });
+                html: message,
+            });
         }
+    }
+    async addOpenPartFile(file, id) {
+        const eds = await this.edsRepository.findOne(id);
+        eds.openPartFileData = file.buffer.toString('base64');
+        eds.openPartFileName = file.originalname;
+        eds.openPartFileType = file.mimetype;
+        eds.openPartFileSize = file.size;
+        await this.edsRepository.save(eds);
+    }
+    async deleteOpenPartFile(id) {
+        const eds = await this.edsRepository.findOne(id);
+        eds.openPartFileData = null;
+        eds.openPartFileName = null;
+        eds.openPartFileType = null;
+        eds.openPartFileSize = null;
+        await this.edsRepository.save(eds);
+    }
+    async getOpenPartFileById(id) {
+        return await this.edsRepository.findOne({ id }, {
+            select: [
+                'openPartFileData',
+                'openPartFileName',
+                'openPartFileType',
+                'openPartFileSize',
+            ],
+        });
     }
 };
 __decorate([

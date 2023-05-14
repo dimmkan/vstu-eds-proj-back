@@ -1,9 +1,9 @@
-import { TelegramService } from "../telegram/telegram.service";
-import { MailerService } from "@nestjs-modules/mailer";
-import { KktEntity } from "./kkt.entity";
-import { DeleteResult, Repository } from "typeorm";
-import { CreateKktDto } from "./dto/createKkt.dto";
-import { UpdateKktDto } from "./dto/updateKkt.dto";
+import { TelegramService } from '../telegram/telegram.service';
+import { MailerService } from '@nestjs-modules/mailer';
+import { KktEntity } from './kkt.entity';
+import { DeleteResult, Repository } from 'typeorm';
+import { CreateKktDto } from './dto/createKkt.dto';
+import { UpdateKktDto } from './dto/updateKkt.dto';
 export declare class KktService {
     private readonly telegramService;
     private readonly mailerService;

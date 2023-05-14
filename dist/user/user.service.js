@@ -33,7 +33,10 @@ let UserService = class UserService {
         return await this.userRepository.delete(id);
     }
     async authUser(loginUserDto) {
-        const user = await this.userRepository.findOne({ name: loginUserDto.login, password: loginUserDto.password });
+        const user = await this.userRepository.findOne({
+            name: loginUserDto.login,
+            password: loginUserDto.password,
+        });
         return user ? true : false;
     }
 };

@@ -1,10 +1,10 @@
 /// <reference types="multer" />
-import { TelegramService } from "../telegram/telegram.service";
-import { MailerService } from "@nestjs-modules/mailer";
-import { EdsEntity } from "./eds.entity";
-import { DeleteResult, Repository } from "typeorm";
-import { CreateEdsDto } from "./dto/creadteEds.dto";
-import { UpdateEdsDto } from "./dto/updateEds.dto";
+import { TelegramService } from '../telegram/telegram.service';
+import { MailerService } from '@nestjs-modules/mailer';
+import { EdsEntity } from './eds.entity';
+import { DeleteResult, Repository } from 'typeorm';
+import { CreateEdsDto } from './dto/creadteEds.dto';
+import { UpdateEdsDto } from './dto/updateEds.dto';
 export declare class EdsService {
     private readonly telegramService;
     private readonly mailerService;
@@ -19,4 +19,7 @@ export declare class EdsService {
     deleteFile(id: number): Promise<void>;
     cronEds30(): Promise<void>;
     cronEds14(): Promise<void>;
+    addOpenPartFile(file: Express.Multer.File, id: number): Promise<void>;
+    deleteOpenPartFile(id: number): Promise<void>;
+    getOpenPartFileById(id: number): Promise<EdsEntity>;
 }

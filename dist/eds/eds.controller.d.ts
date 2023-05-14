@@ -1,11 +1,11 @@
 /// <reference types="multer" />
 import { StreamableFile } from '@nestjs/common';
-import { EdsService } from "./eds.service";
-import { EdsEntity } from "./eds.entity";
-import { Response } from "express";
-import { CreateEdsDto } from "./dto/creadteEds.dto";
-import { UpdateEdsDto } from "./dto/updateEds.dto";
-import { DeleteResult } from "typeorm";
+import { EdsService } from './eds.service';
+import { EdsEntity } from './eds.entity';
+import { Response } from 'express';
+import { CreateEdsDto } from './dto/creadteEds.dto';
+import { UpdateEdsDto } from './dto/updateEds.dto';
+import { DeleteResult } from 'typeorm';
 export declare class EdsController {
     private readonly edsService;
     constructor(edsService: EdsService);
@@ -16,4 +16,7 @@ export declare class EdsController {
     downloadFile(res: Response, id: number): Promise<StreamableFile>;
     uploadFile(file: Express.Multer.File, id: number): Promise<void>;
     deleteFile(id: number): Promise<void>;
+    uploadOpenPartFile(file: Express.Multer.File, id: number): Promise<void>;
+    deleteOpenPartFile(id: number): Promise<void>;
+    downloadOpenPartFile(res: Response, id: number): Promise<StreamableFile>;
 }

@@ -48,6 +48,20 @@ let EdsController = class EdsController {
     async deleteFile(id) {
         await this.edsService.deleteFile(id);
     }
+    async uploadOpenPartFile(file, id) {
+        await this.edsService.addOpenPartFile(file, id);
+    }
+    async deleteOpenPartFile(id) {
+        await this.edsService.deleteOpenPartFile(id);
+    }
+    async downloadOpenPartFile(res, id) {
+        const file = await this.edsService.getOpenPartFileById(id);
+        res.setHeader('Content-Disposition', `attachment; filename="${file.openPartFileName}"`);
+        res.setHeader('Content-type', file.openPartFileType);
+        res.setHeader('Content-Length', file.openPartFileSize);
+        res.setHeader('Cache-Control', 'no-cache');
+        return new common_1.StreamableFile(Buffer.from(file.openPartFileData.toString(), 'base64'));
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -101,6 +115,30 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], EdsController.prototype, "deleteFile", null);
+__decorate([
+    (0, common_1.Post)('addopenpartfile/:id'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number]),
+    __metadata("design:returntype", Promise)
+], EdsController.prototype, "uploadOpenPartFile", null);
+__decorate([
+    (0, common_1.Delete)('deleteopenpartfile/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], EdsController.prototype, "deleteOpenPartFile", null);
+__decorate([
+    (0, common_1.Get)('downloadopenpart/:id'),
+    __param(0, (0, common_1.Res)({ passthrough: true })),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number]),
+    __metadata("design:returntype", Promise)
+], EdsController.prototype, "downloadOpenPartFile", null);
 EdsController = __decorate([
     (0, common_1.Controller)('eds'),
     __metadata("design:paramtypes", [eds_service_1.EdsService])

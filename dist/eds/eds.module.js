@@ -19,7 +19,7 @@ EdsModule = __decorate([
     (0, common_1.Module)({
         imports: [telegram_module_1.TelegramModule, typeorm_1.TypeOrmModule.forFeature([eds_entity_1.EdsEntity])],
         controllers: [eds_controller_1.EdsController],
-        providers: [eds_service_1.EdsService]
+        providers: [eds_service_1.EdsService],
     })
 ], EdsModule);
 exports.EdsModule = EdsModule;

@@ -58,7 +58,8 @@ let KktService = class KktService {
             const formatTime = time.toLocaleDateString();
             const org = element['organization'];
             emailRows += `<tr><td>${org}</td><td>${formatTime}</td></tr>`;
-            const tgMessage = '<b>Заканчиваются срок действия ФН! (менее 14 дней)</b>' + `\n Организация: ${org} \n Дата окончания ФН: ${formatTime}`;
+            const tgMessage = '<b>Заканчиваются срок действия ФН! (менее 14 дней)</b>' +
+                `\n Организация: ${org} \n Дата окончания ФН: ${formatTime}`;
             try {
                 await this.telegramService.sendMessage(tgMessage);
             }
@@ -75,10 +76,11 @@ let KktService = class KktService {
                     ${table}
                 </body>
             </html>`;
-            this.mailerService.sendMail({
+            this.mailerService
+                .sendMail({
                 to: 'd.kanaev@vyborstroi.ru, m.grachev@vyborstroi.ru',
                 subject: 'Заканчивается срок действия ФН (менее 14 дней)',
-                html: message
+                html: message,
             })
                 .then(() => { })
                 .catch(() => { });
