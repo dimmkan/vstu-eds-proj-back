@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateUsersLabelsDto } from './dto/create.labels.dto';
 import { UpdateUsersLabelsDto } from './dto/update.labels.dto';
+import * as fs from 'fs';
 
 @Injectable()
 export class LabelsService {
@@ -21,7 +22,9 @@ export class LabelsService {
   ): Promise<UsersLabelsEntity> {
     const newLabels = new UsersLabelsEntity();
     Object.assign(newLabels, newLabelsDto);
-    return await this.usersLabelsRepository.save(newLabels);
+    const result = await this.usersLabelsRepository.save(newLabels);
+    fs.writeFileSync('.job_trigger', '');
+    return result;
   }
 
   async updateLabels(
@@ -29,10 +32,16 @@ export class LabelsService {
   ): Promise<UsersLabelsEntity> {
     const labels = await this.usersLabelsRepository.findOne(updatedLabels.id);
     Object.assign(labels, updatedLabels);
-    return await this.usersLabelsRepository.save(labels);
+    const result = await this.usersLabelsRepository.save(labels);
+    fs.writeFileSync('.job_trigger', '');
+    return result;
   }
 
   async deleteLabels(id: number): Promise<DeleteResult> {
     return await this.usersLabelsRepository.delete(id);
+  }
+
+  getStatus(): boolean {
+    return fs.existsSync('.job_trigger');
   }
 }

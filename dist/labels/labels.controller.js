@@ -24,6 +24,9 @@ let LabelsController = class LabelsController {
     async getList() {
         return await this.labelsService.getList();
     }
+    getStatus() {
+        return this.labelsService.getStatus();
+    }
     async addLabels(newLabels) {
         return await this.labelsService.addLabels(newLabels);
     }
@@ -40,6 +43,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], LabelsController.prototype, "getList", null);
+__decorate([
+    (0, common_1.Get)('status'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Boolean)
+], LabelsController.prototype, "getStatus", null);
 __decorate([
     (0, common_1.Post)('add'),
     __param(0, (0, common_1.Body)()),

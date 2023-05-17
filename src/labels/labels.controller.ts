@@ -14,6 +14,11 @@ export class LabelsController {
     return await this.labelsService.getList();
   }
 
+  @Get('status')
+  getStatus(): boolean {
+    return this.labelsService.getStatus();
+  }
+
   @Post('add')
   async addLabels(
     @Body() newLabels: CreateUsersLabelsDto,

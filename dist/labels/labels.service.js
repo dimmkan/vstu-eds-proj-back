@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const labels_entity_1 = require("./labels.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const fs = require("fs");
 let LabelsService = class LabelsService {
     constructor(usersLabelsRepository) {
         this.usersLabelsRepository = usersLabelsRepository;
@@ -36,6 +37,9 @@ let LabelsService = class LabelsService {
     }
     async deleteLabels(id) {
         return await this.usersLabelsRepository.delete(id);
+    }
+    getStatus() {
+        return fs.existsSync('.job_trigger');
     }
 };
 LabelsService = __decorate([

@@ -9,4 +9,5 @@ export declare class LabelsService {
     addLabels(newLabelsDto: CreateUsersLabelsDto): Promise<UsersLabelsEntity>;
     updateLabels(updatedLabels: UpdateUsersLabelsDto): Promise<UsersLabelsEntity>;
     deleteLabels(id: number): Promise<DeleteResult>;
+    getStatus(): boolean;
 }
