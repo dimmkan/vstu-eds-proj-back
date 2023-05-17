@@ -15,8 +15,8 @@ export class LabelsController {
   }
 
   @Get('status')
-  getStatus(): boolean {
-    return this.labelsService.getStatus();
+  async getStatus(): Promise<boolean> {
+    return await this.labelsService.getStatus();
   }
 
   @Post('add')
@@ -31,6 +31,11 @@ export class LabelsController {
     @Body() updatedLabels: UpdateUsersLabelsDto,
   ): Promise<UsersLabelsEntity> {
     return await this.labelsService.updateLabels(updatedLabels);
+  }
+
+  @Post('savechanges')
+  async saveChanges(): Promise<void> {
+    return await this.labelsService.createJobTrigger();
   }
 
   @Delete('delete/:id')

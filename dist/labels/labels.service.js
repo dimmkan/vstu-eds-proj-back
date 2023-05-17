@@ -28,18 +28,33 @@ let LabelsService = class LabelsService {
     async addLabels(newLabelsDto) {
         const newLabels = new labels_entity_1.UsersLabelsEntity();
         Object.assign(newLabels, newLabelsDto);
-        return await this.usersLabelsRepository.save(newLabels);
+        const result = await this.usersLabelsRepository.save(newLabels);
+        return result;
     }
     async updateLabels(updatedLabels) {
         const labels = await this.usersLabelsRepository.findOne(updatedLabels.id);
         Object.assign(labels, updatedLabels);
-        return await this.usersLabelsRepository.save(labels);
+        const result = await this.usersLabelsRepository.save(labels);
+        return result;
     }
     async deleteLabels(id) {
         return await this.usersLabelsRepository.delete(id);
     }
-    getStatus() {
-        return fs.existsSync('.job_trigger');
+    async createJobTrigger() {
+        await this.usersLabelsRepository
+            .createQueryBuilder()
+            .update(labels_entity_1.UsersLabelsEntity)
+            .set({
+            flag: 0,
+        })
+            .execute();
+        fs.writeFileSync('.job_trigger', '');
+    }
+    async getStatus() {
+        const result = await this.usersLabelsRepository.find({
+            where: { flag: 1 },
+        });
+        return result.length ? true : false;
     }
 };
 LabelsService = __decorate([

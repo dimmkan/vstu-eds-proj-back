@@ -24,14 +24,17 @@ let LabelsController = class LabelsController {
     async getList() {
         return await this.labelsService.getList();
     }
-    getStatus() {
-        return this.labelsService.getStatus();
+    async getStatus() {
+        return await this.labelsService.getStatus();
     }
     async addLabels(newLabels) {
         return await this.labelsService.addLabels(newLabels);
     }
     async updateLabels(updatedLabels) {
         return await this.labelsService.updateLabels(updatedLabels);
+    }
+    async saveChanges() {
+        return await this.labelsService.createJobTrigger();
     }
     async deleteLabels(id) {
         return await this.labelsService.deleteLabels(id);
@@ -47,7 +50,7 @@ __decorate([
     (0, common_1.Get)('status'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Boolean)
+    __metadata("design:returntype", Promise)
 ], LabelsController.prototype, "getStatus", null);
 __decorate([
     (0, common_1.Post)('add'),
@@ -63,6 +66,12 @@ __decorate([
     __metadata("design:paramtypes", [update_labels_dto_1.UpdateUsersLabelsDto]),
     __metadata("design:returntype", Promise)
 ], LabelsController.prototype, "updateLabels", null);
+__decorate([
+    (0, common_1.Post)('savechanges'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], LabelsController.prototype, "saveChanges", null);
 __decorate([
     (0, common_1.Delete)('delete/:id'),
     __param(0, (0, common_1.Param)('id')),

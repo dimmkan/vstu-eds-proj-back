@@ -23,7 +23,6 @@ export class LabelsService {
     const newLabels = new UsersLabelsEntity();
     Object.assign(newLabels, newLabelsDto);
     const result = await this.usersLabelsRepository.save(newLabels);
-    fs.writeFileSync('.job_trigger', '');
     return result;
   }
 
@@ -33,7 +32,6 @@ export class LabelsService {
     const labels = await this.usersLabelsRepository.findOne(updatedLabels.id);
     Object.assign(labels, updatedLabels);
     const result = await this.usersLabelsRepository.save(labels);
-    fs.writeFileSync('.job_trigger', '');
     return result;
   }
 
@@ -41,7 +39,21 @@ export class LabelsService {
     return await this.usersLabelsRepository.delete(id);
   }
 
-  getStatus(): boolean {
-    return fs.existsSync('.job_trigger');
+  async createJobTrigger(): Promise<void> {
+    await this.usersLabelsRepository
+      .createQueryBuilder()
+      .update(UsersLabelsEntity)
+      .set({
+        flag: 0,
+      })
+      .execute();
+    fs.writeFileSync('.job_trigger', '');
+  }
+
+  async getStatus(): Promise<boolean> {
+    const result = await this.usersLabelsRepository.find({
+      where: { flag: 1 },
+    });
+    return result.length ? true : false;
   }
 }

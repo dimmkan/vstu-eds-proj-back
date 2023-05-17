@@ -7,8 +7,9 @@ export declare class LabelsController {
     private readonly labelsService;
     constructor(labelsService: LabelsService);
     getList(): Promise<UsersLabelsEntity[]>;
-    getStatus(): boolean;
+    getStatus(): Promise<boolean>;
     addLabels(newLabels: CreateUsersLabelsDto): Promise<UsersLabelsEntity>;
     updateLabels(updatedLabels: UpdateUsersLabelsDto): Promise<UsersLabelsEntity>;
+    saveChanges(): Promise<void>;
     deleteLabels(id: number): Promise<DeleteResult>;
 }

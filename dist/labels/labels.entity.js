@@ -12,6 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersLabelsEntity = void 0;
 const typeorm_1 = require("typeorm");
 let UsersLabelsEntity = class UsersLabelsEntity {
+    insertCreated() {
+        this.flag = 1;
+    }
+    insertUpdated() {
+        this.flag = 1;
+    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -29,6 +35,22 @@ __decorate([
     (0, typeorm_1.Column)('simple-json'),
     __metadata("design:type", Array)
 ], UsersLabelsEntity.prototype, "ids_array", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], UsersLabelsEntity.prototype, "flag", void 0);
+__decorate([
+    (0, typeorm_1.BeforeInsert)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UsersLabelsEntity.prototype, "insertCreated", null);
+__decorate([
+    (0, typeorm_1.BeforeUpdate)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UsersLabelsEntity.prototype, "insertUpdated", null);
 UsersLabelsEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'users_labels' })
 ], UsersLabelsEntity);
