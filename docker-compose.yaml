@@ -3,8 +3,8 @@ services:
   api:
     image: vstu_eds_back:latest
     container_name: vstu_eds_back
-    environment:
-      DB_HOST: mysqldb
+    env_file:
+      - ./.env
     restart: always
     ports:
       - 3000:3000
