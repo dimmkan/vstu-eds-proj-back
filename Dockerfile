@@ -11,3 +11,4 @@ ADD package.json ./
 RUN npm install --only=prod
 COPY --from=build /opt/app/dist ./dist
 CMD ["node", "./dist/main.js"]
+EXPOSE 3000
