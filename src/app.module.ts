@@ -22,7 +22,7 @@ import { LabelsModule } from './labels/labels.module';
     MailerModule.forRootAsync({
       useFactory: () => ({
         transport: {
-          host: 'exch01.test.local',
+          host: process.env.MAIL_HOST,
           port: '587',
           secure: false,
           requireTLS: true,
