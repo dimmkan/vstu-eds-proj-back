@@ -24,8 +24,7 @@ import { LabelsModule } from './labels/labels.module';
         transport: {
           host: process.env.MAIL_HOST,
           port: process.env.MAIL_PORT,
-          secure: false,
-          requireTLS: true,
+          secure: true,
           auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASSWORD,
