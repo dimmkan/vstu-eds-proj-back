@@ -29,12 +29,6 @@ import { LabelsModule } from './labels/labels.module';
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASSWORD,
           },
-          tls: {
-            rejectUnauthorized: false,
-          },
-        },
-        defaults: {
-          from: 'Управление сертификатами <send@test.ru>',
         },
       }),
     }),
