@@ -23,7 +23,7 @@ import { LabelsModule } from './labels/labels.module';
       useFactory: () => ({
         transport: {
           host: process.env.MAIL_HOST,
-          port: '587',
+          port: process.env.MAIL_PORT,
           secure: false,
           requireTLS: true,
           auth: {
