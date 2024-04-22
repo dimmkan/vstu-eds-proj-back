@@ -47,7 +47,7 @@ export class LabelsService {
         flag: 0,
       })
       .execute();
-    fs.writeFileSync('.job_trigger', '');
+    fs.writeFileSync('../trigger/.job_trigger', '');
   }
 
   async getStatus(): Promise<boolean> {
