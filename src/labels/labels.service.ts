@@ -84,7 +84,7 @@ export class LabelsService {
                 data: {
                   user_name: item.user_name,
                   comp_name: item.comp_name,
-                  org_name: res.organization,
+                  org_name: res?.organization || '-',
                 },
               };
             }),
