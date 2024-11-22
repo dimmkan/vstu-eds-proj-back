@@ -33,20 +33,13 @@ AppModule = __decorate([
             mailer_1.MailerModule.forRootAsync({
                 useFactory: () => ({
                     transport: {
-                        host: 'exch01.test.local',
-                        port: '587',
-                        secure: false,
-                        requireTLS: true,
+                        host: process.env.MAIL_HOST,
+                        port: +process.env.MAIL_PORT,
+                        secure: true,
                         auth: {
                             user: process.env.MAIL_USER,
                             pass: process.env.MAIL_PASSWORD,
                         },
-                        tls: {
-                            rejectUnauthorized: false,
-                        },
-                    },
-                    defaults: {
-                        from: 'Управление сертификатами <send@test.ru>',
                     },
                 }),
             }),

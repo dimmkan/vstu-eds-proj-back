@@ -48,7 +48,7 @@ let LabelsService = class LabelsService {
             flag: 0,
         })
             .execute();
-        fs.writeFileSync('.job_trigger', '');
+        fs.writeFileSync('./trigger/.job_trigger', '');
     }
     async getStatus() {
         const result = await this.usersLabelsRepository.find({

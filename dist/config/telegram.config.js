@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTelegramConfig = void 0;
 const getTelegramConfig = () => {
     return {
-        token: 'Telegram token here',
+        token: process.env.TELEGRAM_TOKEN,
         chatId: '-541340962',
     };
 };
