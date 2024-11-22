@@ -4,6 +4,7 @@ import { UsersLabelsEntity } from './labels.entity';
 import { CreateUsersLabelsDto } from './dto/create.labels.dto';
 import { UpdateUsersLabelsDto } from './dto/update.labels.dto';
 import { DeleteResult } from 'typeorm';
+import { ShowcaseLabelsDto } from './dto/showcase.labels.dto';
 
 @Controller('labels')
 export class LabelsController {
@@ -17,6 +18,12 @@ export class LabelsController {
   @Get('status')
   async getStatus(): Promise<boolean> {
     return await this.labelsService.getStatus();
+  }
+
+  @Get('showcase')
+  async getShowcaseData(): Promise<ShowcaseLabelsDto[]> {
+    //Promise<ShowcaseLabelsDto[]>
+    return await this.labelsService.getShowcaseData();
   }
 
   @Post('add')

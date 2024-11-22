@@ -27,6 +27,9 @@ let LabelsController = class LabelsController {
     async getStatus() {
         return await this.labelsService.getStatus();
     }
+    async getShowcaseData() {
+        return await this.labelsService.getShowcaseData();
+    }
     async addLabels(newLabels) {
         return await this.labelsService.addLabels(newLabels);
     }
@@ -52,6 +55,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], LabelsController.prototype, "getStatus", null);
+__decorate([
+    (0, common_1.Get)('showcase'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], LabelsController.prototype, "getShowcaseData", null);
 __decorate([
     (0, common_1.Post)('add'),
     __param(0, (0, common_1.Body)()),

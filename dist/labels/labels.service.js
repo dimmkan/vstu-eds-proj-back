@@ -18,9 +18,11 @@ const labels_entity_1 = require("./labels.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const fs = require("fs");
+const eds_entity_1 = require("../eds/eds.entity");
 let LabelsService = class LabelsService {
-    constructor(usersLabelsRepository) {
+    constructor(usersLabelsRepository, edsRepository) {
         this.usersLabelsRepository = usersLabelsRepository;
+        this.edsRepository = edsRepository;
     }
     async getList() {
         return await this.usersLabelsRepository.find();
@@ -56,11 +58,40 @@ let LabelsService = class LabelsService {
         });
         return result.length ? true : false;
     }
+    async getShowcaseData() {
+        for (let i = 0; i < 1000000000; i++) {
+        }
+        const labels = await this.usersLabelsRepository.find();
+        const result = await Promise.all(labels.map(async (item) => {
+            return {
+                key: item.id.toString(),
+                data: {
+                    user_name: item.user_name,
+                    comp_name: item.comp_name,
+                    org_name: '-',
+                },
+                children: await Promise.all(item.ids_array.map(async (id, idx) => {
+                    const res = await this.edsRepository.findOne({ id }, { select: ['organization'] });
+                    return {
+                        key: `${item.id}-${idx}`,
+                        data: {
+                            user_name: item.user_name,
+                            comp_name: item.comp_name,
+                            org_name: res.organization,
+                        },
+                    };
+                })),
+            };
+        }));
+        return result;
+    }
 };
 LabelsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(labels_entity_1.UsersLabelsEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(eds_entity_1.EdsEntity)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], LabelsService);
 exports.LabelsService = LabelsService;
 //# sourceMappingURL=labels.service.js.map
